@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import MainBasic from "./components/main/MainBasic";
+import StateObject from "./components/StateObject";
 
 const ImgData = [
   {
@@ -33,6 +34,9 @@ function App() {
           ImgData={ImgData} // การรับข้อมูลแบบ props ที่จะส่งข้อมูลไปยัง component ลูก ไม่สามารถส่งข้าม component ได้
           // การส่งข้อมูลจะสามารถส่งเป็น ตัวแปร,function,parameter,data หรือ useState และ etc... ก็สามารถส่งได้
           />} 
+        />
+        <Route path="/stateobject"
+        element={<StateObject/>}
         />
       </Routes>
     </div>

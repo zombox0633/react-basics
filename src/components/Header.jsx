@@ -47,27 +47,29 @@ const LinkMain = styled(Link)`
 
 export const ButtonDefault = styled.button`
     width: 4.5rem;
-    height: 2.5rem;
-    border: 1px solid #fff;
+    height: 2.5rem; 
+    border: 2px solid #fff;
     border-radius: 8px;
     background-color: #333;
     font-size: 1.2rem;
     color: #fff;
+    box-shadow: #fff 4px 4px 0 0, #000 4px 4px 0 1px;
     user-select: none;
 
     &:hover{
-        box-shadow: 0 10px 20px rgba(255,255,255,0.1);
         cursor: pointer;
     }
     &:focus{
         outline: 2px solid #fff;
-        outline-offset: 2px;
+        outline-offset: 1 px;
     }
     &:active{
         outline: 2px solid #fff;
         outline-offset: 2px;
-        transform: scale(0.98);
-        transition: 0.35s ease-in;
+        //transform:  scale(0.75);
+        box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+        transform:translate(2px, 2px);
+        transition: 0.05s ease-out;
     }
 `
 
