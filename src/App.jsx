@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import MainBasic from "./components/main/MainBasic";
 import StateObject from "./components/StateObject";
+import UseEffect from "./components/useEffect/UseEffect";
 
 const ImgData = [
   {
@@ -35,8 +36,11 @@ function App() {
           // การส่งข้อมูลจะสามารถส่งเป็น ตัวแปร,function,parameter,data หรือ useState และ etc... ก็สามารถส่งได้
           />} 
         />
-        <Route path="/stateobject"
+        <Route path="/state_object"
         element={<StateObject/>}
+        />
+        <Route path="/use_effect"
+        element={<UseEffect/>}
         />
       </Routes>
     </div>
