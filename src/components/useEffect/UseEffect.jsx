@@ -1,8 +1,10 @@
 import React,{useEffect,useState} from 'react'
 import Popup from './Popup'
 
+import { ButtonDefault,Body } from '../style/Style'
+
 function UseEffect() {
-  const time = Date.now()
+  
   //useState
   const [count, setCount] = useState(0)
   const [users, setUsers] = useState([])
@@ -42,28 +44,29 @@ function UseEffect() {
   let popup = null
   if(!!isPopupOpen){
     popup = <Popup 
-    onPopupClose = {() => setIsPopupOpen(false)} //เป็นการส่ง props ในรูปแบบ Arrow function
+    onPopupClose = {() => setIsPopupOpen(false)} //เป็นการส่ง props ในรูปแบบ Arrow function 
     />
   }
 
   return (
-    <div>
+    <Body>
       <div>
         <div>
           <h2>useEffect</h2>
           <div>
-            <button onClick={
+            <ButtonDefault onClick={
               () => setCount((p) => p+1)}
-            >Add</button>
-            <button onClick={
+              style={{marginRight:'1rem'}} //การใช้ style ใน React return function จะต้องสร้าง {{style css ที่จะใช้}} จะไม่มีเว้นวรรค หรือ - จะเป็นตัวพิมใหญ่แทน
+            >Add</ButtonDefault>
+            <ButtonDefault onClick={
               () => setIsPopupOpen(true)}
-            >Open</button>
+            >Open</ButtonDefault>
           </div>
         </div>
         {popup}
         {userElements}
       </div>
-    </div>
+    </Body>
   )
 }
 

@@ -1,16 +1,12 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { ButtonDefault } from '../Header'
+import { ButtonDefault,Body} from '../style/Style'
 
 import SubMainBasic from './SubMainBasic'
 import PostImg from './PostImg'
 
 
-const MainBasicBody = styled.div`
-  display: block;
-  margin: 0 5%;
-  
-`
+
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
@@ -77,7 +73,7 @@ function MainBasic(props) {
   })
 
   return (
-    <MainBasicBody>
+    <Body>
       <Head>
         <div>
           <h1>MainBasic</h1>
@@ -99,7 +95,7 @@ function MainBasic(props) {
         {ImgDataElements} {/* การใช้งาน ตัวแปร หรือ function ใน return function*/}
       </DivGrid>
       {ImgPost}
-    </MainBasicBody>
+    </Body>
   )
 }
 

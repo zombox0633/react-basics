@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { ButtonDefault } from './style/Style'
 
 const HeaderBody = styled.div`
     position: sticky;
@@ -43,34 +44,6 @@ const LinkMain = styled(Link)`
     color: #fff;
     cursor: pointer;
     user-select: none;
-`
-
-export const ButtonDefault = styled.button`
-    width: 4.5rem;
-    height: 2.5rem; 
-    border: 2px solid #fff;
-    border-radius: 8px;
-    background-color: #333;
-    font-size: 1.2rem;
-    color: #fff;
-    box-shadow: #fff 4px 4px 0 0, #000 4px 4px 0 1px;
-    user-select: none;
-
-    &:hover{
-        cursor: pointer;
-    }
-    &:focus{
-        outline: 2px solid #fff;
-        outline-offset: 1 px;
-    }
-    &:active{
-        outline: 2px solid #fff;
-        outline-offset: 2px;
-        //transform:  scale(0.75);
-        box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
-        transform:translate(2px, 2px);
-        transition: 0.05s ease-out;
-    }
 `
 
 function Header() {

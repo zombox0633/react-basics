@@ -1,9 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 
+import ProviderData from "./components/context/ProviderData";
 import Header from "./components/Header";
 import MainBasic from "./components/main/MainBasic";
 import StateObject from "./components/StateObject";
 import UseEffect from "./components/useEffect/UseEffect";
+import LoginForm from "./components/useContextTest/LoginForm";
+import Error from "./components/Error";
 
 const ImgData = [
   {
@@ -27,7 +30,7 @@ const ImgData = [
 function App() {
   
   return (
-    <div>
+    <ProviderData>
       <Header/> {/* ทำการแสดงข้อมูล Header.jsx ใน component แม่ */}
       <Routes>{/* การกำหนดการจะใช้งาน Route หลายตัวจำเป็นต้องใส่ก่อน และใส่ <Route> ตัวลูกภายใน */}
         <Route path="/" //การกำหนดการเข้าหน้า wed
@@ -42,8 +45,14 @@ function App() {
         <Route path="/use_effect"
         element={<UseEffect/>}
         />
+        <Route path="/login"
+        element={<LoginForm/>}
+        />
+        <Route path="*" // path="*" จะเข้าก็ต่อเมื่อ link ไม่ต้องกับอันที่มีใน Routes
+        element={<Error/>}
+        />
       </Routes>
-    </div>
+    </ProviderData>
   );
 }
 

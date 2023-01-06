@@ -1,74 +1,12 @@
 import React,{useState} from 'react'
 import styled from 'styled-components'
-import { ButtonDefault } from './Header'
+import { ButtonDefault, FormCanter, InputDiv } from './style/Style'
 
 const StateObjectBody = styled.div`
     margin-left: 5%;
     margin-right: 5%;
 `
-const FormCanter = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 16rem;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px solid #fff;
-    border-radius: 8px;
-    box-shadow: 12px 12px 0px;
-    
-    button{
-        margin-top: 2rem;
-    }
-`
-const InputDiv = styled.div`
-    
-    input{
-        width: 20rem;
-        margin-top: 2rem;
-        padding: 0.5rem;
-        border: 0;
-        border-bottom: 2px solid #9b9b9b;
-        outline: 0; //การนำกรอบออกเมื่อ  active หรือ focus
-        background: transparent;
-        transition: border-color 0.2s; //การเปลียนแปลงสีเส้น เวลา
-        color: #fff;
-        font-size: 1rem;
 
-        &::placeholder{
-            color: transparent;
-        }
-        &:placeholder-shown ~ .form__label{ //เมื่อ placeholder ทำการแสดงจะให้ .form__label ทำงานตามเงื่อนไขนี้
-            margin-top: -2rem;
-        }
-
-        &:focus{
-            border-width: 3px ;
-            /* border-image: linear-gradient(to right,#11998e, #38ef7d); //การใช้แบบนี้จะต้องเพิ่ม  border-image-slice: 1; ด้วย
-            border-image-slice: 1; */
-            border-image: linear-gradient(45deg, #11998e, #38ef7d) 1; // 1 ด้านหลังคือ border-image-slice: 1;
-        }
-        &:focus ~ .form__label{ //เมื่อ focus input ทำการเปลียนแปลง class form__label ด้วย
-            margin-top: -3.4rem;
-            transition: 0.2s; //เปลียนแปลงกลับ
-            font-size: 1rem;
-            color: #11998e;
-            cursor: text;
-        }
-
-    }
-    .form__label {
-        position: absolute;
-        display: block;
-        margin-top: -3.4rem;
-        transition: 0.2s;
-        font-size: 1rem;
-        color: #fff;
-        z-index: 997;
-    }
-`
 const DivCenter = styled.div`
     display: flex;
     flex-direction: column;
@@ -77,7 +15,7 @@ const DivCenter = styled.div`
     margin-top: 5rem;
 `
 
-const ShowNoteContent = styled.div`
+const ShowContent = styled.div`
     width: 25rem;
     margin-bottom: 2.5rem;
     padding: 0 2rem 2rem;
@@ -129,7 +67,7 @@ function StateObject() {
     //function
     //เมือเกิดการเปลี่ยนแปลงค่าใน useState Note และ input
     const onNoteValueChange = (event) => {
-        const {name,value} = event.target //ทำการระบุตัวที่ค้องการใช้ใน function โดยการใช้ event.target ทำการระบุว่าจะเอาตัวใดใน {} เหมือนการใช้ props
+        const {name,value} = event.target //ทำการระบุตัวที่ต้องการใช้ใน function โดยการใช้ event.target ทำการข้อมูลที่อยู่ใน input มาใช้งาน
         setNote((prevNote)=>{
             return {
                 ...prevNote, //คือการนำค่าเก่าข้อ Note ที่เป็น content และ author มาทำการคัดลอก โดยใช้ parameter prevNote มาคัดลอกโดยใช้ ...prevNote
@@ -140,7 +78,7 @@ function StateObject() {
 
     //เมือเกิดการเปลี่ยนแปลงค่าใน useState editNotes และ input
     const onEditNoteValueChange = (event) => {
-        const {name,value} = event.target //ทำการระบุตัวที่ค้องการใช้ใน function โดยการใช้ event.target ทำการระบุว่าจะเอาตัวใดใน {} เหมือนการใช้ props
+        const {name,value} = event.target //ทำการระบุตัวที่ค้องการใช้ใน function โดยการใช้ event.target ทำการข้อมูลที่อยู่ใน input มาใช้งาน
         setEditNotes((prevNote)=>{
             return {
                 ...prevNote, //คือการนำค่าเก่าข้อ Note ที่เป็น content และ author มาทำการคัดลอก โดยใช้ parameter prevNote มาคัดลอกโดยใช้ ...prevNote
@@ -248,7 +186,7 @@ function StateObject() {
     const noteElements = formNotes.map((theNote)=>{ 
         //map วนลูปเพื่อนำค่าใน Array แต่ละตัวมากระทำตามใน Function  ที่เรากำหนดไว้ แต่ Map นั้น สามารถ return ค่าออกมาได้โดยค่าที่ return ออกมาจะเป็น Array
         return(
-             <ShowNoteContent key={theNote.id}> 
+             <ShowContent key={theNote.id}> 
              {/* อย่าลืมใส่ key เป็น index หรือจะสร้าง key ก็ได้*/}
                 <div>
                     <h3>Name : {theNote.author}</h3>
@@ -266,7 +204,7 @@ function StateObject() {
                             >Delete</a>
                     </div>
                 </EditAndDeleteBody>
-            </ShowNoteContent>
+            </ShowContent>
         )
     })
 
@@ -274,7 +212,7 @@ function StateObject() {
     let editNotesElement = null
     if(!!editNotes){ //ถ้า editNotes มีข้อมูล หรือ ไม่เป็น null หรือ undefined
         editNotesElement = (
-            <ShowNoteContent>
+            <ShowContent>
                 <form onSubmit={onEditNoteSubmit}> {/* รับข้อมูลใน form ไปกระทำการตาม onEditNoteSubmit จะสามารถใช้ข้อมูลในแท็กของตนโดยใช้ parameter*/}
                     <h2>Edit</h2>
                     <div>
@@ -294,7 +232,7 @@ function StateObject() {
                         </div>
                     </EditAndDeleteBody>
                 </form>
-            </ShowNoteContent>
+            </ShowContent>
         )
     }
 
