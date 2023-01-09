@@ -5,5 +5,6 @@ export const Context = createContext({ //ทำการประกาศกา
     // auth:null,
     // setAuth: ()=>{}
     authState: null, 
-    authDispatch: ()=>{}
+    authDispatch: ()=>{},
+    members: null
 })

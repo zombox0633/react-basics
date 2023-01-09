@@ -12,25 +12,33 @@ function UseEffect() {
   //console.log(isPopupOpen);
 
   //useEffect
-  useEffect(()=>{ //การทำงานของ useEffect จะอยู่ในรูปแบบ function *ส่วนใหญ่ใช้ในการทำงานกับการโหลดตัวข้อมูลภายนอก หรือใช้ใน hook
+  //การทำงานของ useEffect จะอยู่ในรูปแบบ function *ส่วนใหญ่ใช้ในการทำงานกับการโหลดตัวข้อมูลภายนอก หรือใช้ใน hook
+  useEffect(()=>{ 
     console.log(`App effect count = ${count}`);
-
-    return () => { //ส่วน return ของ useEffec จะทำงานก็ต่อเมื่อส่วนก่อน return useEffect ทำงานเสร็จ
-      //*แต่ตอนโหลดหน้า web ตอนแรกจะไม่แสดงการทำงานของ return ของ useEffect จะมาทำงานอีกทีตอนเกิดการกระทำการโดย [count]
+    //ส่วน return ของ useEffec จะทำงานก็ต่อเมื่อส่วนก่อน return useEffect ทำงานเสร็จ
+    //*แต่ตอนโหลดหน้า web ตอนแรกจะไม่แสดงการทำงานของ return ของ useEffect จะมาทำงานอีกทีตอนเกิดการกระทำการโดย [count]
+    return () => { 
       console.log(`App effect return count = ${count}`);
     }
-  }, [count])// [count] ด้านหลังคือตัวรวบรวมปัจจัย หรือ การกระทำที่จะทำให้ UseEffect กลับมา run ใหม่ *เมื่อ count มีการเปลี่ยนแปลงตัว useEffect จะทำงาน
+  }, [count])
+  // [count] ด้านหลังคือตัวรวบรวมปัจจัย หรือ การกระทำที่จะทำให้ UseEffect กลับมา run ใหม่ *เมื่อ count มีการเปลี่ยนแปลงตัว useEffect จะทำงาน
   //*กรณีที่ 1 ไม่ใส่ตัว [] คือ UseEffect จะจับทุกสิ่งทุกอย่างที่กระทำในหน้า wed *ในไฟล์ที่ใช้ UseEffect นี้เท่านั้น
   //*กรณีที่ 2 ใส่ตัว [] แต่ไม่ใส่ค่าในวงเล็บ คือ ตัว UseEffect จะไม่จับการทำงานอะไรเลย แต่จะทำงานตอนเปิดหน้า web ครั้งเดียว
 
-  useEffect(() => { // useEffect นี้ใช้ในการโหลดข้อมูล
-    fetch('https://reqres.in/api/users?page=2').then((res) => { //โหลดข้อมูลจาก https://reqres.in/api/users?page=2 *then เมื่อตัวเก่าทำทำเสร็จใน then จะทำงานต่อ
-      return res.json(); //ทำการ res(parameter) แปลงเป็นไฟล์ json
-    }).then((resJon) => { //*then เมื่อทำเสร็จ
+  // useEffect นี้ใช้ในการโหลดข้อมูล
+  //โหลดข้อมูลจาก https://reqres.in/api/users?page=2 *then เมื่อตัวเก่าทำทำเสร็จใน then จะทำงานต่อ
+  useEffect(() => {
+    //ทำการ res(parameter) แปลงเป็นไฟล์ json
+    //*then เมื่อทำเสร็จ
+    fetch('https://reqres.in/api/users?page=2').then((res) => { 
+      return res.json(); 
+    }).then((resJon) => {
       //console.log(resJon);
-      setUsers(resJon.data); //นำข้อมูลที่แปลงแล้วไปใส่ใน useState Users
+      //setUsers(resJon.data) นำข้อมูลที่แปลงแล้วไปใส่ใน useState Users
+      setUsers(resJon.data); 
     })
-  }, [])//มันจะทำงานครั้งแรกแค่ครั้งเดียวเพราะไม่ได้กำหนดปัจจัยในการที่มันจะทำงานต่อ
+  }, [])
+  //มันจะทำงานครั้งแรกแค่ครั้งเดียวเพราะไม่ได้กำหนดปัจจัยในการที่มันจะทำงานต่อ
   
   //Element
   const userElements = users.map((user, index) =>{ //การนำข้อมูล useState users มาทำการ map และแสดง

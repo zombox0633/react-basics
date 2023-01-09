@@ -51,6 +51,24 @@ export const FormCanter = styled.form`
         margin-top: 2rem;
     }
 `
+export const DivCanter = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 16rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    box-shadow: 12px 12px 0px;
+    
+    button{
+        margin-top: 2rem;
+    }
+`
+
 export const InputDiv = styled.div`
     
     input{

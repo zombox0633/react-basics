@@ -1,4 +1,4 @@
-import React,{useReducer} from 'react'
+import React,{useReducer,useState} from 'react'
 import { Context } from './Context'
 
 function Reducer(state, action){//Reducer เหมือนเป็นตัวจัดการ State
@@ -14,7 +14,12 @@ function Reducer(state, action){//Reducer เหมือนเป็นตั�
 
 function ProviderData({children}) {
   //useState
-   //const [auth, setAuth] = useState(null)
+   const [members, setMembers] = useState([
+    {id: 'test',username:'best'},
+    {id: 'abc',username:'cba'},
+    {id: 'zzz',username:'zzz'},
+    {id: 'xxx',username:'xxx'}
+   ])
 
   //useReducer
   const [authState, authDispatch] = useReducer(Reducer,null) // Dispatch คือตัวส่งข้อมูลคำสั่ง parameter action ไปทำงานข้างใน State(Reducer)
@@ -22,7 +27,7 @@ function ProviderData({children}) {
 
   return (
     <Context.Provider 
-    value={{authState, authDispatch}}> {/* คำสั่ง Provider ของ Context เป็นตัวประกาศว่าภายใน component มันจะสามารถใข้ useContext ส่งข้อมูลข้าม component ได้โดยจะต่างกับ props ที่จะต้องส่งเป็นเป็นทอดๆ component แม่ไปลูกต่อๆไป */}
+    value={{authState, authDispatch,members}}> {/* คำสั่ง Provider ของ Context เป็นตัวประกาศว่าภายใน component มันจะสามารถใข้ useContext ส่งข้อมูลข้าม component ได้โดยจะต่างกับ props ที่จะต้องส่งเป็นเป็นทอดๆ component แม่ไปลูกต่อๆไป */}
       {children}
     </Context.Provider>
   )

@@ -55,51 +55,62 @@ function StateObject() {
     {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(time)
 
     //useState
+    //useState เมื่อใช้งานจะสามารถการเปลี่ยนแปลง ui หน้าเว็บได้
     const [Note, setNote] = useState({ //State x Object ทำการแก้ปัญหาการสร้าง useState หลายตัวโดยไม่จำเป็นในการกระทำการ
         content: '',
         author: '',
         timestamp: ''
     })
-    const [formNotes, setFromNotes] = useState([]) //State x Array ใช้ในการเก็บข้อมูลของ from ที่ถูก sumbit ของ from
+    //State x Array ใช้ในการเก็บข้อมูลของ from ที่ถูก sumbit ของ from
+    const [formNotes, setFromNotes] = useState([]) 
     const [editNotes, setEditNotes] = useState(null)
 
 
     //function
     //เมือเกิดการเปลี่ยนแปลงค่าใน useState Note และ input
     const onNoteValueChange = (event) => {
-        const {name,value} = event.target //ทำการระบุตัวที่ต้องการใช้ใน function โดยการใช้ event.target ทำการข้อมูลที่อยู่ใน input มาใช้งาน
+        //ทำการระบุตัวที่ต้องการใช้ใน function โดยการใช้ event.target ทำการข้อมูลที่อยู่ใน input มาใช้งาน
+        const {name,value} = event.target 
         setNote((prevNote)=>{
             return {
-                ...prevNote, //คือการนำค่าเก่าข้อ Note ที่เป็น content และ author มาทำการคัดลอก โดยใช้ parameter prevNote มาคัดลอกโดยใช้ ...prevNote
-                [name]:value //และใช้ name เป็นเหมือนตัวที่ระบุว่า [name]? 'content' : 'author' และใส่ค่าของ value ของ input ให้ตรงกับ Object
+                //คือการนำค่าเก่าข้อ Note ที่เป็น content และ author มาทำการคัดลอก โดยใช้ parameter prevNote มาคัดลอกโดยใช้ ...prevNote
+                //และใช้ name เป็นเหมือนตัวที่ระบุว่า [name]? 'content' : 'author' และใส่ค่าของ value ของ input ให้ตรงกับ Object
+                ...prevNote, 
+                [name]:value 
             }
         })
     }
 
     //เมือเกิดการเปลี่ยนแปลงค่าใน useState editNotes และ input
     const onEditNoteValueChange = (event) => {
-        const {name,value} = event.target //ทำการระบุตัวที่ค้องการใช้ใน function โดยการใช้ event.target ทำการข้อมูลที่อยู่ใน input มาใช้งาน
+        //ทำการระบุตัวที่ค้องการใช้ใน function โดยการใช้ event.target ทำการข้อมูลที่อยู่ใน input มาใช้งาน
+        const {name,value} = event.target 
         setEditNotes((prevNote)=>{
             return {
-                ...prevNote, //คือการนำค่าเก่าข้อ Note ที่เป็น content และ author มาทำการคัดลอก โดยใช้ parameter prevNote มาคัดลอกโดยใช้ ...prevNote
-                [name]:value //และใช้ name เป็นเหมือนตัวที่ระบุว่า [name]? 'content' : 'author' และใส่ค่าของ value ของ input ให้ตรงกับ Object
+                //คือการนำค่าเก่าข้อ Note ที่เป็น content และ author มาทำการคัดลอก โดยใช้ parameter prevNote มาคัดลอกโดยใช้ ...prevNote
+                //และใช้ name เป็นเหมือนตัวที่ระบุว่า [name]? 'content' : 'author' และใส่ค่าของ value ของ input ให้ตรงกับ Object
+                ...prevNote, 
+                [name]:value 
             }
         })
     }
 
     //function submit
     const onNoteSubmit = (event) => {
+        //event.preventDefault() เมื่อ Submit จะป้องกันไม่ให้เกิดการ refetch
+        event.preventDefault() 
 
-        event.preventDefault() //เมื่อ Submit จะป้องกันไม่ให้เกิดการ refetch
-
-        if(!!Note.content & !!Note.author){ //ถ้าค่าของ Note.content และ Note.author ค่าเป็น null หรือ undefined จะไม่สามารถเขาเงือนไข
-            setNote((p)=>{ //การทำ timestamp ในการบันทึกข้อมูล
+        //ถ้าค่าของ Note.content และ Note.author ค่าเป็น null หรือ undefined จะไม่สามารถเขาเงือนไข
+        if(!!Note.content & !!Note.author){ 
+            //การทำ timestamp ในการบันทึกข้อมูล
+            setNote((p)=>{ 
                 p.timestamp = timestamp
             })
 
             //console.log(Note);
             setFromNotes((prevAllNotes) => {
-                const newNote = {...Note} //ทำการคัดลอก Note และเพิ่ม id ใน Object เป็น time.toString()
+                //ทำการคัดลอก Note และเพิ่ม id ใน Object เป็น time.toString()
+                const newNote = {...Note} 
                 newNote.id = time.toString()
 
                 return ( 
@@ -110,8 +121,8 @@ function StateObject() {
                     [newNote,...prevAllNotes] //ทำการเพิ่ม id เพื่อเป็น key ในการ map ให้ notElements
                     )
             })
-            
-            setNote({ //ทำการ reset ค่าใน useState Note
+            //ทำการ reset ค่าใน useState Note
+            setNote({ 
                 content: '',
                 author: '',
                 timestamp: ''
@@ -121,30 +132,40 @@ function StateObject() {
 
     //function edit Submit 
     const onEditNoteSubmit = (event) => {
-        event.preventDefault() //เมื่อ Submit จะป้องกันไม่ให้เกิดการ refetch
+        //event.preventDefault() เมื่อ Submit จะป้องกันไม่ให้เกิดการ refetch
+        event.preventDefault() 
         if(!!editNotes.content & !!editNotes.author){
-            setEditNotes((p)=>{ //การทำ timestamp ในการบันทึกข้อมูลใหม่
+            setEditNotes((p)=>{ 
+                //การทำ timestamp ในการบันทึกข้อมูลใหม่
                 p.timestamp = timestamp
             })
 
             setFromNotes((prevAllNotes) => {
                 return prevAllNotes.map((theNote) =>{
-                    if(theNote.id !== editNotes.id){ //ทำการเช็คชนิดข้อมูล และตัวข้อมูลทั้งสองตรงกันไม ถ้าไม่ตรงเข้าเงือนไข
-                        return theNote //ส่งข้อมูล Note เก่าไป
+                    //ทำการเช็คชนิดข้อมูล และตัวข้อมูลทั้งสองตรงกันไม ถ้าไม่ตรงเข้าเงือนไข
+                    if(theNote.id !== editNotes.id){
+                        //ส่งข้อมูล Note เก่าไป
+                        return theNote 
                     }
-                    return editNotes // ส่งข้อมูล editNotes ไปให้ setFromNotes
+                    // ส่งข้อมูล editNotes ไปให้ setFromNotes
+                    return editNotes 
                 })
             })
-            setEditNotes(null) //ทำการปิดตัว editNotesElement โดยการทำให้ editNotes เป็นค่าเริ่มต้น
+            //ทำการปิดตัว editNotesElement โดยการทำให้ editNotes เป็นค่าเริ่มต้น
+            setEditNotes(null) 
         }
     }
 
     //function delete
-    const onNoteDelete = (NoteId) => { // รับค่า theNote.id
-        setFromNotes((prevAllNotes) => { //ทำการแก้ไข useState setFromNotes
-            return prevAllNotes.filter((theNote)=>{ // prevAllNotes ทำการกรองตัวที่อยู่ใน formNotes โดยใช้ parameter theNote
-                return theNote.id !== NoteId //เงื่อนไขในการเลือกตัวที่เอาคือ ค่า theNote.id และ NoteId ต้องไม่เท่ากันทั้ง ชนิดตัวแปร และตัวข้อมูลทั้งสองตัองไม่เท่ากัน
+    // รับค่า theNote.id
+    const onNoteDelete = (NoteId) => { 
+         //ทำการแก้ไข useState setFromNotes
+        setFromNotes((prevAllNotes) => {
+            // prevAllNotes ทำการกรองตัวที่อยู่ใน formNotes โดยใช้ parameter theNote
+            return prevAllNotes.filter((theNote)=>{ 
+                //เงื่อนไขในการเลือกตัวที่เอาคือ ค่า theNote.id และ NoteId ต้องไม่เท่ากันทั้ง ชนิดตัวแปร และตัวข้อมูลทั้งสองตัองไม่เท่ากัน
                 //เงือนไขการสร้างคือการลบ และตัว theNote.id กับ NoteId มันเท่ากัน filter จะไม่สามารถหาตัวที่มีตามเงือนไขได้จึงไม่มีตัวที่หาทำให้ prevAllNotes เป็นค่าว่างและส่งให้ setFromNotes จึงทำการให้ setFromNotes ลบตัวข้อมูลนั้นออกไป
+                return theNote.id !== NoteId 
             })
         })
     }
@@ -177,14 +198,15 @@ function StateObject() {
             <ButtonDefault type='submit'>Submit</ButtonDefault>
         </FormCanter>
     )
-    if(!!editNotes){ //ทำการปิดตัว formInputElements เมื่อ useState มีข้อมูล
+    //ทำการปิดตัว formInputElements เมื่อ useState มีข้อมูล
+    if(!!editNotes){ 
         formInputElements = null
     }
 
 
     //การสร้าง Elements ข้อความ
+    //map วนลูปเพื่อนำค่าใน Array แต่ละตัวมากระทำตามใน Function  ที่เรากำหนดไว้ แต่ Map นั้น สามารถ return ค่าออกมาได้โดยค่าที่ return ออกมาจะเป็น Array
     const noteElements = formNotes.map((theNote)=>{ 
-        //map วนลูปเพื่อนำค่าใน Array แต่ละตัวมากระทำตามใน Function  ที่เรากำหนดไว้ แต่ Map นั้น สามารถ return ค่าออกมาได้โดยค่าที่ return ออกมาจะเป็น Array
         return(
              <ShowContent key={theNote.id}> 
              {/* อย่าลืมใส่ key เป็น index หรือจะสร้าง key ก็ได้*/}
@@ -196,11 +218,12 @@ function StateObject() {
                 <EditAndDeleteBody>
                     <div>
                         <a onClick={
-                            () => {setEditNotes(theNote)}} //ใช้ useState setEditNotes ในการแก้ไข เมื่อกดจะทำนำข้อมูลของ parameter theNote มาเก็บใน setEditNotes
+                            //ใช้ useState setEditNotes ในการแก้ไข เมื่อกดจะทำนำข้อมูลของ parameter theNote มาเก็บใน setEditNotes
+                            () => {setEditNotes(theNote)}} 
                             >Edit</a>
                         <a onClick={
-                            () => {onNoteDelete(theNote.id)}} 
                             // ส่งค่า theNote.id ที่ทำการ map ของ notElements ไปใช้งานใน function onNoteDelete โดยใช้ NoteId ทำการรับค่ารับค่า
+                            () => {onNoteDelete(theNote.id)}} 
                             >Delete</a>
                     </div>
                 </EditAndDeleteBody>
@@ -210,7 +233,8 @@ function StateObject() {
 
     //function edit และทำการ delete ข้อตัวเก่าที่ทำการแก้ไข
     let editNotesElement = null
-    if(!!editNotes){ //ถ้า editNotes มีข้อมูล หรือ ไม่เป็น null หรือ undefined
+    //ถ้า editNotes มีข้อมูล หรือ ไม่เป็น null หรือ undefined
+    if(!!editNotes){ 
         editNotesElement = (
             <ShowContent>
                 <form onSubmit={onEditNoteSubmit}> {/* รับข้อมูลใน form ไปกระทำการตาม onEditNoteSubmit จะสามารถใช้ข้อมูลในแท็กของตนโดยใช้ parameter*/}
@@ -220,8 +244,10 @@ function StateObject() {
                     </div>
                     <InputDiv>
                         <input className='Input1' type="text" placeholder='Text'
-                            name='content' // ใช้ name ของ input ในการระบุการส่งข้อมูลไปให้ onNoteValueChange
-                            value={editNotes.content} //ค่าของ input = useState editNotes.content
+                            // ใช้ name ของ input ในการระบุการส่งข้อมูลไปให้ onNoteValueChange
+                            name='content' 
+                            //ค่าของ input = useState editNotes.content
+                            value={editNotes.content} 
                             onChange={onEditNoteValueChange} 
                         />
                         <label className='form__label'><strong>Text</strong></label>

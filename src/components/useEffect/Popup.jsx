@@ -11,11 +11,13 @@ const BackgroundBlack = styled.div`
 function Popup(props) {
 
     useEffect(() => {
+      //document.documentElement.style.overflowY = 'hidden' การใช้งาน javascirpt ในการเปลี่ยนแปลง css ในหน้า Popup.jsx
       console.log('Popup start');
-        document.documentElement.style.overflowY = 'hidden' //การใช้งาน javascirpt ในการเปลี่ยนแปลง css ในหน้า Popup.jsx
+        document.documentElement.style.overflowY = 'hidden' 
       return () => {
+        //*document.documentElement.style.overflowY = 'auto' การเปิดใช้งานอะไรใน useEffect ก็อย่าลืมปิดหรือเปลี่ยนเป็นค่าเดิม
         console.log('Popup end');
-        document.documentElement.style.overflowY = 'auto' //*การเปิดใช้งานอะไรใน useEffect ก็อย่าลืมปิดหรือเปลี่ยนเป็นค่าเดิม
+        document.documentElement.style.overflowY = 'auto'
       }
     }, [])
     

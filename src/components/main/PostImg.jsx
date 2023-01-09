@@ -32,11 +32,12 @@ const ImgPostContent = styled.div`
   z-index: 999;
 `
 function PostImg(props) {
-  const {Data,onClickBg} = props
   //การปิดรูปภาพ หรือเปิดรูปภาพของ PostImg.jsx ขึ้นอยู่กับการเปลี่ยนแปลง selected useState ของ component แม่ MainBasic.jsx
+  const {Data,onClickBg} = props
   return (
     <PostImgBody>
-        <PostImgBg onClick={onClickBg}/>{/* เมื่อทำการกดจะทำการเปลี่ยนค่า selected useState เป็นค่า null จะทำการ*/}
+        {/* เมื่อทำการกดจะทำการเปลี่ยนค่า selected useState เป็นค่า null จะทำการ*/}
+        <PostImgBg onClick={onClickBg}/>
         <ImgPostContent>
             <img src={Data.ImgUrl} alt={Data.title} />
             <h4>{Data.title}</h4>
