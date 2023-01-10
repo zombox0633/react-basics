@@ -7,6 +7,7 @@ import StateObject from "./components/StateObject";
 import UseEffect from "./components/useEffect/UseEffect";
 import LoginForm from "./components/useContextTest/LoginForm";
 import UseRef from "./components/UseRef";
+import UseMemoUseCallback from "./components/UseMemoUseCallback";
 import Error from "./components/Error";
 
 const ImgData = [
@@ -51,6 +52,9 @@ function App() {
         />
         <Route path="/use_ref"
         element={<UseRef/>}
+        />
+        <Route path="/use_memo_callback"
+        element={<UseMemoUseCallback/>}
         />
         <Route path="*" // path="*" จะเข้าก็ต่อเมื่อ link ไม่ต้องกับอันที่มีใน Routes
         element={<Error/>}

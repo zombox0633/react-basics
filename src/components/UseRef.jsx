@@ -1,5 +1,6 @@
 import React,{useState,useRef} from 'react'
 import {Body,DivCanter,ButtonDefault,InputDiv} from './style/Style'
+import ForwardRef from './ForwardRef';
 
 function UseRef() {
     //useState
@@ -52,8 +53,8 @@ function UseRef() {
             </div>
             <InputDiv>
                 <input className='Input1' type="file" placeholder='file'
-                onChange={(event) => setFile(event.target.files[0])} //การระบุค่าที่ใช้เป็น files ตำแหน่งแรกในตัว input
-                />
+                onChange={(event) => setFile(event.target.files[0])} 
+                /> {/* การระบุค่าที่ใช้เป็น files ตำแหน่งแรกในตัว input */}  
                 <label className='form__label'><strong>File</strong></label>
             </InputDiv>
             <ButtonDefault
@@ -81,8 +82,8 @@ function UseRef() {
             </div>
             <InputDiv>
                 <input className='Input1' type="file" placeholder='file'
-                ref={fileRefV2} //การใช้งาน useRef ที่ถูกต้อง *useRef สามารถเก็บข้อมูลของ input นี้ได้โดยใช้ ref={useRef}
-                />
+                ref={fileRefV2}
+                /> {/* การใช้งาน useRef ที่ถูกต้อง *useRef สามารถเก็บข้อมูลของ input นี้ได้โดยใช้ ref={useRef} */}
                 <label className='form__label'><strong>File</strong></label>
             </InputDiv>
             <ButtonDefault
@@ -90,21 +91,13 @@ function UseRef() {
             >submit
             </ButtonDefault>
         </DivCanter>
-        <DivCanter className='useRef__text' style={{marginTop:'2rem'}}>
-            <div>
-                <h3>useRef text</h3>
-            </div>
-            <InputDiv>
-                <input className='Input1' type="text" placeholder='Text'
-                ref={textRef} //การใช้งาน useRef ที่ถูกต้อง *useRef สามารถเก็บข้อมูลของ input นี้ได้โดยใช้ ref={useRef}
-                />
-                <label className='form__label'><strong>Text</strong></label>
-            </InputDiv>
-            <ButtonDefault
-                onClick={onAllTextClick}
-            >submit
-            </ButtonDefault>
-        </DivCanter>
+        <ForwardRef
+        onAllTextClick={onAllTextClick}
+        ref={textRef}
+        /> {/* การทดสอบการส่งข้อมูล useRef จาก component แม่ไปลูกโดยใช้ forwardRef  
+        *onAllTextClick คือการส่งข้อมูล props แบบปกติ 
+        * ref={textRef} กำารส่ง useRef ข้าม component แม่ไปลูก และต้องใช้ forwardRef รับ
+        */}
     </Body>
   )
 }
