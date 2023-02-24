@@ -79,7 +79,7 @@ export const InputDiv = styled.div`
         border-bottom: 2px solid #9b9b9b;
         outline: 0; //การนำกรอบออกเมื่อ  active หรือ focus
         background: transparent;
-        transition: border-color 0.2s; //การเปลียนแปลงสีเส้น เวลา
+        //transition: border-color 0.2s; //การเปลียนแปลงสีเส้น เวลา
         color: #fff;
         font-size: 1rem;
 
