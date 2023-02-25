@@ -12,11 +12,23 @@ import {devtools, persist} from "zustand/middleware"
 //create((set,get)=>{}) *รู้แค่ set * set จะเหมือน useState(setState) ที่ทำหน้าที่เปลี่ยนค่าของ zustand
 //การใช้งาน set คือ สร้าง fn : () => set((parameter) => ({ค่าที่อยู่ภายใน zustand ที่ถูกสร้างขึ้น : parameter.ค่าที่อยู่ภายใน zustand และการเปลี่ยนแปลง}))
 //ส่วน () => {set((state)=>(),false ถ้าเป็น true จะไม่สนใจค่าเก่าของตัวที่ set ,"increasePopulation" คือการระบุบชื่อเมือทำการเช็ดการทำงานของ state ใน Redux Dev)}
-const useZustand = create((set)=>({
+
+//zustand basic
+// const useZustand = create((set)=>({
+//     bears:0,
+//     increasePopulation: () => set((state)=>({bears:state.bears + 1}),false,"increasePopulation"),
+//     reducePopulation: () => {set((state) => ({bears:state.bears - 1}))},
+//     removeAll: () => set({bears: 0})
+// }))
+
+//zustand persist
+const useZustand = create()(
+  devtools(persist((set)=>({
     bears:0,
     increasePopulation: () => set((state)=>({bears:state.bears + 1}),false,"increasePopulation"),
     reducePopulation: () => {set((state) => ({bears:state.bears - 1}))},
     removeAll: () => set({bears: 0})
-}))
+  }),{name: "counter",}),{ store: "counterStore" })
+)
 
 export default useZustand
